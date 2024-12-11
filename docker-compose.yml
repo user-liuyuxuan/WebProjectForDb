@@ -1,0 +1,33 @@
+version: '3'
+services:
+  webapp:
+    tty: true
+    stdin_open: true
+    build: .
+    image: liuyyxx/webfortest:latest
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_PORT=3306
+      - MYSQL_DATABASE=hospitaldb
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=Mnb#4i@Liu
+
+  db:
+    tty: true
+    stdin_open: true
+    image: liuyyxx/mysqlfortest:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=Mnb#4i@Liu
+      - MYSQL_DATABASE=hospitaldb
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+    
+
+volumes:
+  db-data:
